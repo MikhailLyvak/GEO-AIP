@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 
@@ -131,4 +132,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-GDAL_LIBRARY_PATH = 'C:/OSGeo4W/bin/gdal307.dll'
+GDAL_LIBRARY_PATH = r'C:/OSGeo4W/bin/gdal307.dll'
+GEOS_LIBRARY_PATH = 'C:/OSGeo4W/bin/geos_c.dll'
+os.environ['PROJ_LIB'] = 'C:/OSGeo4W/share/proj'
