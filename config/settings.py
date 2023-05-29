@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+from datetime import timedelta
 import os
 from pathlib import Path
 
@@ -39,13 +40,17 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    "geo",
     "django.contrib.gis",
     "rest_framework_gis",
+    "debug_toolbar",
+    "drf_spectacular",
+    "geo",
+    "user",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -107,6 +112,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = "user.User"
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -135,3 +142,34 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 GDAL_LIBRARY_PATH = r'C:/OSGeo4W/bin/gdal307.dll'
 GEOS_LIBRARY_PATH = 'C:/OSGeo4W/bin/geos_c.dll'
 os.environ['PROJ_LIB'] = 'C:/OSGeo4W/share/proj'
+
+REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_THROTTLE_CLASSES": [
+        "rest_framework.throttling.AnonRateThrottle",
+        "rest_framework.throttling.UserRateThrottle",
+    ],
+    "DEFAULT_THROTTLE_RATES": {"anon": "10/day", "user": "30/day"},
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "GEO Service API",
+    "DESCRIPTION": "Service to work with GEO data",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    "SWAGGER_UI_SETTINGS": {
+        "deepLinking": True,
+        "defaultModelRendering": "model",
+        "defaultModelsExpandDepth": 2,
+        "defaultModelExpandDepth": 2,
+    },
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=600),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "ROTATE_REFRESH_TOKENS": False,
+}
