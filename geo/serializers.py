@@ -26,6 +26,13 @@ class PlaceSerializer(serializers.ModelSerializer):
 
 
 class PlaceListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Place
+        fields = ["id", "name", "description", "geom", "aproved", "user"]
+        read_only_fields = ["aproved", "user"]
+
+
+class PlaceDetailSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
 
     class Meta:

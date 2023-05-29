@@ -3,13 +3,16 @@ from rest_framework.response import Response
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
+from drf_spectacular.utils import extend_schema, OpenApiParameter
+from drf_spectacular.types import OpenApiTypes
 from django.contrib.gis.db.models.functions import Distance
 from django.contrib.gis.geos import fromstr
 
 from geo.models import Place
 from geo.serializers import (
     PlaceSerializer,
-    PlaceListSerializer
+    PlaceListSerializer,
+    PlaceDetailSerializer
 )
 
 
@@ -31,11 +34,13 @@ class PlaceViewSet(viewsets.ModelViewSet):
         permission_classes=(IsAdminUser,),
     )
     def approve_place(self, request, *args, **kwargs):
+        """The function is available only for admins,
+        to approve new place to be shown for all users."""
         instance = self.get_object()
 
         if instance.aproved:
             return Response(
-                {"detail": "Cannot update an already approved place."},
+                {"detail": "This place is already approved."},
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
@@ -61,10 +66,42 @@ class PlaceViewSet(viewsets.ModelViewSet):
     def get_serializer_class(self):
         if self.action == "list":
             return PlaceListSerializer
+        if self.action == "retrieve":
+            return PlaceDetailSerializer
 
         return PlaceSerializer
 
+    @extend_schema(
+        parameters=[
+            OpenApiParameter(
+                "name",
+                type=OpenApiTypes.STR,
+                description="Filter by place name (ex. ?name=Rivne)",
+            ),
+        ]
+    )
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
 
+
+@extend_schema(
+    parameters=[
+        OpenApiParameter(
+            name="latitude",
+            type=OpenApiTypes.NUMBER,
+            description="The latitude coordinate for finding the nearest place.",
+            required=True,
+            location=OpenApiParameter.QUERY,
+        ),
+        OpenApiParameter(
+            name="longitude",
+            type=OpenApiTypes.NUMBER,
+            description="The longitude coordinate for finding the nearest place.",
+            required=True,
+            location=OpenApiParameter.QUERY,
+        ),
+    ],
+)
 class NearestPlaceView(generics.RetrieveAPIView):
     queryset = Place.objects.all()
     serializer_class = PlaceSerializer

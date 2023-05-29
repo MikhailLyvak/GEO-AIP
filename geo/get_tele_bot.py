@@ -16,7 +16,7 @@ def bot_notification(name, geom, desc):
             f"===== Description ===== \n"
             f"{desc}\n"
             f"===== Coordinates ===== \n"
-            f"Longitude --> {longitude} \n"
+            f"Latitude --> {longitude} \n"
             f"Longitude --> {latitude} \n"
         },
     )
