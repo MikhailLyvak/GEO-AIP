@@ -4,6 +4,9 @@ There is a GEO srevice, where you can create/update/delete or see some geo place
 ### Docs: /api/doc/swagger/
 
 
+## 🎥 Video PRESENTATION ->   [Click me!][(https://youtu.be/6RyPXR9MXGg)]
+
+
 ## 💼 Installing using GIT
 ```
 git clone https://github.com/MikhailLyvak/DRF-Library.git
