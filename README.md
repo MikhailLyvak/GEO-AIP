@@ -8,7 +8,7 @@ There is a GEO srevice, where you can create/update/delete or see some geo place
 
 
 ## 💼 Installing using GIT
-```
+```python
 git clone https://github.com/MikhailLyvak/DRF-Library.git
 cd PY-GEO-API
 
