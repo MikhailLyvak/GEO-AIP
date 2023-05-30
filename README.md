@@ -11,16 +11,11 @@ There is a GEO srevice, where you can create/update/delete or see some geo place
 ```
 git clone https://github.com/MikhailLyvak/DRF-Library.git
 cd PY-GEO-API
-OSGeo4W -> should be already installed
-# Change this for real path
-GDAL_LIBRARY_PATH = r'C:/OSGeo4W/bin/gdal307.dll'
-GEOS_LIBRARY_PATH = 'C:/OSGeo4W/bin/geos_c.dll'
-os.environ['PROJ_LIB'] = 'C:/OSGeo4W/share/proj'
 
-python -m venv venv
-venv\Scripts\activate (on Windows)
-source venv/bin/activate (on macOS)
-pip install -r requirements.txt
+Than use docker ( Should be already installed!!! )
+sudo docker compose up     <-- For Linux
+docker-compose up --build  <-- For Windows        
+
 ```
 
 
