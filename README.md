@@ -9,12 +9,16 @@ There is a GEO srevice, where you can create/update/delete or see some geo place
 
 ## 💼 Installing using GIT
 ```python
-git clone https://github.com/MikhailLyvak/DRF-Library.git
-cd PY-GEO-API
+Download code with this commands:
+    git clone https://github.com/MikhailLyvak/DRF-Library.git
+    cd PY-GEO-API
+Create file named .env    :
+    Fill this file with data from .env.example u can just do copy-paste )
 
 Than use docker ( Should be already installed!!! )
-sudo docker compose up     <-- For Linux
-docker-compose up --build  <-- For Windows        
+
+    sudo docker compose up     <-- For Linux
+    docker-compose up --build  <-- For Windows        
 
 ```
 
