@@ -27,7 +27,7 @@ SECRET_KEY = "django-insecure-1k9l1(ney*i*wb_^yz(jf+2nzvk7@k=qct0kx5s0c3!p!m_zir
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["0.0.0.0", ]
 
 
 # Application definition
@@ -88,7 +88,7 @@ DATABASES = {
         'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': 'localhost',
+        'HOST': 'db',
         'PORT': '5432',
     }
 }
@@ -138,10 +138,6 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
-
-GDAL_LIBRARY_PATH = r'C:/OSGeo4W/bin/gdal307.dll'
-GEOS_LIBRARY_PATH = 'C:/OSGeo4W/bin/geos_c.dll'
-os.environ['PROJ_LIB'] = 'C:/OSGeo4W/share/proj'
 
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
