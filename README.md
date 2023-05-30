@@ -21,7 +21,7 @@ Than use docker ( Should be already installed!!! )
     sudo docker compose up     <-- For Linux
     docker-compose up --build  <-- For Windows
 
-Do to telegram channel to check how bot works:
+Go to telegram channel to check how bot works:
    ===== https://t.me/test_api_geo =====
 ```
 
